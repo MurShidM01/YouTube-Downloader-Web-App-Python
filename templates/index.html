@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Downloader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container fadeIn">
+        <h1><b>YouTube Downloader</b></h1>
+        <div class="animated-border"></div>
+
+        <form action="/download" method="post">
+            <label for="url">Enter YouTube URL:</label>
+            <input type="text" name="url" required>
+            <br>
+            <label for="format">Choose format:</label>
+            <select name="format" required>
+                <option value="mp4">MP4</option>
+                <option value="mp3">MP3</option>
+            </select>
+            <br>
+            <input type="submit" value="Download">
+        </form>
+
+        {% if error %}
+        <p class="error">Error: {{ error }}</p>
+        {% endif %}
+
+        {% if file_name %}
+        <p class="downloaded">Downloaded: <a href="/downloaded/{{ file_name }}">{{ file_name }}</a></p>
+        {% endif %}
+
+        <footer>
+            Developed By <a href="https://github.com/MurShidM01" target="_blank"><b>Ali Khan Jalbani</b></a>
+        </footer>
+    </div>
+
+    <script>
+        // Animated border
+        const animatedBorder = document.querySelector('.animated-border');
+        setInterval(() => {
+            animatedBorder.classList.toggle('fadeIn');
+        }, 2000);
+    </script>
+</body>
+</html>
